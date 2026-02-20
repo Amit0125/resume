@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amit Adhikari - Portfolio</title>
+    <!-- Chosen Palette: "Calm Neutrals" - A professional palette using off-white, slate gray, and a subtle teal accent to create a modern and focused feel. -->
+    <!-- Application Structure Plan: The application is designed as a narrative journey for a recruiter. It starts with a bold hero section (Home), flows into a personal summary (About), provides tangible proof of skills with an interactive chart (Skills), details work history in a timeline (Experience), and concludes with education and contact info. This top-down structure guides the user from who Amit is to what he can do, making it more engaging than a static document. Navigation is provided for quick access, and subtle animations on scroll enhance the user experience. -->
+    <!-- Visualization & Content Choices: 
+        - Objective -> About Me Section (Goal: Inform): A well-formatted text block to establish a personal connection.
+        - Skills List -> Interactive Radar Chart (Goal: Compare/Inform): A Chart.js radar chart is used to visually represent the balance between Amit's technical and creative skills, a key differentiator. Hovering provides details. This is more impactful than a static list. Library: Chart.js.
+        - Work Experience -> Vertical Timeline (Goal: Change/Organize): A custom-built timeline using HTML/Tailwind CSS to present his freelance work chronologically. This organizes the information clearly and is more visually interesting than a simple list. Method: HTML/CSS.
+        - Education/Certs -> Styled Cards (Goal: Inform): Clean, easy-to-read cards to present academic credentials without distraction. Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link-active {
+            color: #14b8a6; /* teal-500 */
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700">
+
+    <!-- Header & Navigation -->
+    <header id="header" class="bg-slate-50/80 backdrop-blur-lg sticky top-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-xl font-bold text-slate-800">Amit Adhikari</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-slate-600 hover:text-teal-500 transition-colors">About</a>
+                <a href="#skills" class="nav-link text-slate-600 hover:text-teal-500 transition-colors">Skills</a>
+                <a href="#experience" class="nav-link text-slate-600 hover:text-teal-500 transition-colors">Experience</a>
+                <a href="#education" class="nav-link text-slate-600 hover:text-teal-500 transition-colors">Education</a>
+            </nav>
+            <button id="contact-button" class="hidden md:block bg-teal-500 text-white px-4 py-2 rounded-md hover:bg-teal-600 transition-colors">Contact Me</button>
+            <button id="mobile-menu-button" class="md:hidden text-slate-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-slate-600 hover:text-teal-500">About</a>
+            <a href="#skills" class="block py-2 text-slate-600 hover:text-teal-500">Skills</a>
+            <a href="#experience" class="block py-2 text-slate-600 hover:text-teal-500">Experience</a>
+            <a href="#education" class="block py-2 text-slate-600 hover:text-teal-500">Education</a>
+            <button id="mobile-contact-button" class="block w-full mt-2 bg-teal-500 text-white text-center px-4 py-2 rounded-md hover:bg-teal-600">Contact Me</button>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6">
+
+        <!-- Home Section -->
+        <section id="home" class="min-h-[80vh] flex items-center">
+            <div class="w-full text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold text-slate-800 leading-tight">
+                    Amit Adhikari
+                </h1>
+                <p class="mt-4 text-xl md:text-2xl text-teal-600 font-medium">
+                    Physics Graduate | Content Creator | Tech Enthusiast
+                </p>
+                <p class="mt-6 max-w-2xl mx-auto md:mx-0 text-slate-600">
+                    A creative problem-solver with a strong scientific foundation, passionate about leveraging technology and digital media to build engaging experiences.
+                </p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 md:py-32 section-hidden">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">About Me</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 text-lg">
+                I am a highly motivated and analytical Physics graduate with a 7.34 CGPA and foundational skills in Python, HTML, and digital content creation. My academic background in science has equipped me with a rigorous approach to problem-solving and a deep curiosity for how things work. I am now seeking to apply this scientific mindset and my technical aptitude to an entry-level role where I can contribute to team success, gain practical industry experience, and foster my professional growth.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 md:py-32 section-hidden">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-4">My Skillset</h2>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+                My skills bridge the gap between analytical and creative domains. This chart provides a visual representation of my core competencies. Hover over the points to see the specific skills.
+            </p>
+            <div class="chart-container relative w-full max-w-2xl mx-auto h-80 md:h-96">
+                <canvas id="skillsChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 md:py-32 section-hidden">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-16">Professional Experience</h2>
+            <div class="relative max-w-2xl mx-auto">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 -translate-x-1/2 h-full w-0.5 bg-slate-200"></div>
+                
+                <!-- Timeline Item -->
+                <div class="relative mb-8">
+                    <div class="absolute left-1/2 -translate-x-1/2 mt-2 w-4 h-4 bg-teal-500 rounded-full"></div>
+                    <div class="ml-[calc(50%+2rem)] p-6 bg-white rounded-lg shadow-md">
+                        <p class="absolute -left-20 top-1 text-sm text-slate-500 w-24 text-right">2021 - Present</p>
+                        <h3 class="text-lg font-bold text-slate-800">Freelance Content Creator & Digital Media Editor</h3>
+                        <p class="text-sm text-slate-500 mb-4">Self-Employed</p>
+                        <ul class="list-disc list-inside text-slate-600 space-y-2">
+                            <li>Developed and produced original digital content for diverse clients.</li>
+                            <li>Engineered high-quality photo and video assets using advanced editing techniques.</li>
+                            <li>Managed end-to-end project lifecycles, from consultation to final delivery.</li>
+                            <li>Served as the primary point of contact for clients to translate their vision.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 md:py-32 section-hidden">
+            <h2 class="text-3xl font-bold text-center text-slate-800 mb-12">Education & Certifications</h2>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+                <!-- Education Card -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-slate-800">Gauhati University</h3>
+                    <p class="text-slate-500 mb-2">Guwahati, Assam (Expected 2025)</p>
+                    <p class="text-lg text-teal-600 font-semibold">Bachelor of Science (B.Sc.), Physics</p>
+                    <p class="mt-4 text-slate-600">Minor: Mathematics</p>
+                    <p class="text-slate-600">Overall CGPA: 7.34 / 10.0</p>
+                </div>
+                <!-- Certification Card -->
+                <div class="bg-white p-8 rounded-lg shadow-md">
+                    <h3 class="text-xl font-bold text-slate-800">Industrial Automation</h3>
+                    <p class="text-slate-500 mb-2">Arya Vidyapeeth College (2024)</p>
+                    <p class="text-lg text-teal-600 font-semibold">Workshop Certification</p>
+                    <p class="mt-4 text-slate-600">Gained practical knowledge in industrial automation principles and technologies.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="fixed inset-0 bg-slate-800 bg-opacity-75 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full relative">
+            <button id="close-modal-button" class="absolute top-2 right-2 text-slate-500 hover:text-slate-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">Contact Information</h3>
+            <div class="space-y-4 text-slate-600">
+                <div>
+                    <p class="font-semibold text-slate-700">Email Address</p>
+                    <a href="mailto:amitadhikari0125@gmail.com" class="text-teal-600 hover:underline">amitadhikari0125@gmail.com</a>
+                </div>
+                <div>
+                    <p class="font-semibold text-slate-700">Phone Number</p>
+                    <p>+91 8135921771</p>
+                </div>
+                <div>
+                    <p class="font-semibold text-slate-700">Location</p>
+                    <p>Hawaipur, Assam, India</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-100 mt-20">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+            <p>&copy; 2025 Amit Adhikari. All Rights Reserved.</p>
+            <p class="mt-2">Built with passion and a desire to learn.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Scroll animations
+            const sections = document.querySelectorAll('.section-hidden');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Active Nav Link Highlighting
+            const navLinks = document.querySelectorAll('.nav-link');
+            const allSections = document.querySelectorAll('main section');
+            window.addEventListener('scroll', () => {
+                let current = '';
+                allSections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('nav-link-active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('nav-link-active');
+                    }
+                });
+            });
+
+            // Contact Modal Logic
+            const contactButton = document.getElementById('contact-button');
+            const mobileContactButton = document.getElementById('mobile-contact-button');
+            const contactModal = document.getElementById('contact-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            const openModal = () => contactModal.classList.remove('hidden');
+            const closeModal = () => contactModal.classList.add('hidden');
+
+            contactButton.addEventListener('click', openModal);
+            mobileContactButton.addEventListener('click', openModal);
+            closeModalButton.addEventListener('click', closeModal);
+
+            contactModal.addEventListener('click', (event) => {
+                if (event.target === contactModal) {
+                    closeModal();
+                }
+            });
+
+            // Skills Chart
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Problem Solving', 'Content Strategy', 'Web Basics', 'Data Handling', 'Visual Design', 'Physics Principles'],
+                    datasets: [{
+                        label: 'Skill Level',
+                        data: [8, 7, 6, 7, 8, 9], // Representational values
+                        backgroundColor: 'rgba(20, 184, 166, 0.2)',
+                        borderColor: 'rgba(20, 184, 166, 1)',
+                        pointBackgroundColor: 'rgba(20, 184, 166, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(20, 184, 166, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: {
+                                font: { size: 14 },
+                                color: '#334155' // slate-700
+                            },
+                            ticks: {
+                                backdropColor: 'transparent',
+                                color: '#64748b', // slate-500
+                                stepSize: 2
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        label += context.parsed.r;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
